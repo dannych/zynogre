@@ -1,0 +1,38 @@
+<div ng-show="!activities.length" class="well">
+    No activity... Bummer
+</div>
+
+<accordion close-others="true">
+    <accordion-group ng-repeat="activity in activities | orderBy: hypemeter">
+        
+        <accordion-heading>
+            {{activity.title}} 
+            
+            <i class="pull-right glyphicon glyphicon-comment"></i>
+            <span class="label label-success" ng-show="isNewEvent(activity.hypemeter)">New</span>
+            <span class="label label-warning" ng-show="isPopularEvent(activity.hypemeter)">Popular</span>
+            <span class="label label-danger" ng-show="isHotEvent(activity.hypemeter)">Hot</span>
+            
+            
+        </accordion-heading>
+        
+        <div class="hypemeter">
+            <progressbar animate="true" value="activity.hypemeter" max="limit.hot">{{activity.hypemeter}}</progressbar>
+            Hypeness: {{activity.hypemeter}}
+            <button type="button" class="btn btn-primary pull-right" ng-click="increaseHype(activity.$id)">Mash Me!</button>
+        </div>
+        
+        <br />
+        
+        <div class="accordion-body">
+             @{{activity.location}}
+            <br />
+            {{activity.description}}
+        </div>
+
+       <div class="comments">
+           
+       </div>
+        
+    </accordion-group>
+</accordion>
